@@ -255,6 +255,7 @@ class TuyulMenu {
 
 	public function content_tool_page() {
 		$this->add_dependencies( 'content-tool' );
+		$categories = get_categories();
 		?>
         <div id="app">
             <div class="container">
@@ -290,9 +291,16 @@ class TuyulMenu {
                                 </div>
                             </div>
                         </div>
-                        <div v-show="selected_ideas.length>0" class="text-center my-3">
-                            <a :href="download_content" :download="download_name" @click="downloadSelectedIdeas" class="btn btn-outline-info">Download</a>
-                            <button @click="removeSelectedIdeas" class="btn btn-outline-danger">Remove</button>
+                        <div class="d-flex justify-content-between my-3">
+                            <div class="align-middle my-auto">
+                                {{selected_ideas.length}} selected of {{suggested_ideas.length}} suggested ideas
+                            </div>
+                            <div v-show="selected_ideas.length>0">
+                                <button @click="openDraftModal" class="btn btn-outline-success">Save as Draft</button>
+                                <a :href="download_content" :download="download_name" @click="downloadSelectedIdeas"
+                                   class="btn btn-outline-info">Download</a>
+                                <button @click="removeSelectedIdeas" class="btn btn-outline-danger">Remove</button>
+                            </div>
                         </div>
                         <table class="table table-striped table-sm">
                             <thead>
@@ -304,7 +312,7 @@ class TuyulMenu {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="(item, index) of suggested_ideas">
+                            <tr v-if="suggested_ideas.length>0" v-for="(item, index) of suggested_ideas">
                                 <td><input :id="'idea-'+index" :value="item" type="checkbox" name="ideas"
                                            v-model="selected_ideas"/></td>
                                 <td>
@@ -317,11 +325,53 @@ class TuyulMenu {
                                     </button>
                                 </td>
                             </tr>
+                            <tr v-if="suggested_ideas.length<1">
+                                <td colspan="3" class="text-center">No ideas</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="tab-pane fade" id="keyword-trends" role="tabpanel" aria-labelledby="keyword-trends-tab">
                         ...
+                    </div>
+
+                    <div class="modal fade" id="modal-draft" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Save Ideas as Post Draft</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>This action will create multiple post drafts using the selected ideas. The ideas
+                                        will be used as post titles.</p>
+                                    <div class="form-group">
+                                        <label>Post Category</label>
+                                        <select v-model="post_category" class="form-control w-100">
+											<?php
+											foreach ( $categories as $category ) {
+												echo "<option value='$category->term_id'>$category->name</option>";
+											}
+											?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tags</label>
+                                        <textarea v-model="post_tags" class="form-control"></textarea>
+                                        <small>Multiple tags sparated by comma(,)</small>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button :disabled="processing" @click="draftSelectedIdeas" type="button" class="btn btn-outline-success">Create
+                                        <span v-if="!processing">Draft Now</span>
+                                        <span v-if="processing">Processing...</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
