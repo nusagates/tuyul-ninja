@@ -15,6 +15,10 @@ Tuyul Ninja enables you to send wordpress post to available providers via cronjo
 
 [Tuyul Ninja](https://forum.nusagates.com/tags/tuyul-ninja/) enables you to send wordpress post to available providers via cronjob. From the admin screens you can:
 
+ * Get content ideas using Google Suggestion
+ * Get content ideas using Google Trends
+ * Save content ideas to post drafts
+ * Download content ideas as a text file
  * Create job to send specific post by category to email or other provider
  * Run job manualy
  * Delete job
@@ -24,7 +28,7 @@ Tuyul Ninja enables you to send wordpress post to available providers via cronjo
  * Send posts to blogspot automatically
  * Send posts to Telegram Channel automatically
 
-Tuyul Ninja now is only supported to email channel only. For other provider like Google Drive, Google Doc, etc will be released soon.
+Tuyul Ninja now is only supported to sends scheduled post to: Email, Blogger, and Telegram Channel. For other provider like Google Drive, Google Doc, etc will be released soon.
 
 ### Usage
 
