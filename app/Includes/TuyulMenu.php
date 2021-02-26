@@ -11,7 +11,7 @@ class TuyulMenu {
 	 * create admin page menu
 	 */
 	public function set_menu() {
-		add_menu_page( "Tuyul Ninja", "Tuyul Ninja", 'manage_options', 'tuyul-jobs', [ $this, 'job_page' ] );
+		add_menu_page( "Tuyul Ninja", "Tuyul Ninja", 'manage_options', 'tuyul-jobs', [ $this, 'job_page' ] , TUYUL_URL.'resources/img/icon.png?m', 70);
 		add_submenu_page( 'tuyul-jobs', 'All Jobs', 'All Jobs', 'manage_options', 'tuyul-jobs', [ $this, 'job_page' ] );
 		add_submenu_page( 'tuyul-jobs', 'Content Tools', 'Content Tools', 'manage_options', 'content_tool_page', [
 			$this,
@@ -332,7 +332,90 @@ class TuyulMenu {
                         </table>
                     </div>
                     <div class="tab-pane fade" id="keyword-trends" role="tabpanel" aria-labelledby="keyword-trends-tab">
-                        ...
+                        <p>Get all trends keyword by Google Trends</p>
+                        <div class="text-center">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">COUNTRY</span>
+                                </div>
+                                <select v-model="trend_country" class="form-control">
+                                    <option selected="selected" value="p19">Indonesia</option>
+                                    <option value="p40">Afrika Selatan</option>
+                                    <option value="p1">Amerika Serikat</option>
+                                    <option value="p36">Arab Saudi</option>
+                                    <option value="p30">Argentina</option>
+                                    <option value="p8">Australia</option>
+                                    <option value="p44">Austria</option>
+                                    <option value="p17">Belanda</option>
+                                    <option value="p41">Belgia</option>
+                                    <option value="p18">Brasil</option>
+                                    <option value="p38">Cile</option>
+                                    <option value="p49">Denmark</option>
+                                    <option value="p25">Filipina</option>
+                                    <option value="p50">Finlandia</option>
+                                    <option value="p10">Hong Kong</option>
+                                    <option value="p45">Hungaria</option>
+                                    <option value="p3">India</option>
+                                    <option value="p9">Inggris</option>
+                                    <option value="p6">Israel</option>
+                                    <option value="p27">Italia</option>
+                                    <option value="p4">Jepang</option>
+                                    <option value="p15">Jerman</option>
+                                    <option value="p13">Kanada</option>
+                                    <option value="p37">Kenya</option>
+                                    <option value="p32">Kolombia</option>
+                                    <option value="p23">Korea Selatan</option>
+                                    <option value="p34">Malaysia</option>
+                                    <option value="p21">Meksiko</option>
+                                    <option value="p29">Mesir</option>
+                                    <option value="p52">Nigeria</option>
+                                    <option value="p51">Norwegia</option>
+                                    <option value="p31">Polandia</option>
+                                    <option value="p47">Portugal</option>
+                                    <option value="p16">Prancis</option>
+                                    <option value="p43">Republik Cheska</option>
+                                    <option value="p39">Rumania</option>
+                                    <option value="p14">Rusia</option>
+                                    <option value="p5">Singapura</option>
+                                    <option value="p26">Spanyol</option>
+                                    <option value="p42">Swedia</option>
+                                    <option value="p46">Swiss</option>
+                                    <option value="p12">Taiwan</option>
+                                    <option value="p33">Thailand</option>
+                                    <option value="p24">Turki</option>
+                                    <option value="p35">Ukraina</option>
+                                    <option value="p28">Vietnam</option>
+                                    <option value="p48">Yunani</option>
+                                </select>
+                                <div @click="getTrendKeyword" class="input-group-append">
+                                    <button :disabled="processing" class="btn btn-outline-success" type="button">
+                                        <span v-if="!processing">Go Now</span>
+                                        <span v-if="processing">Processing...</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-sm">
+                            <thead>
+                            <tr>
+                                <th>Trend Keywords</th>
+                                <th width="210">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-if="trend_keyword.length>0" v-for="(item, index) of trend_keyword">
+                                <td v-html="item[0]"/>
+                                <td>
+                                    <button @click="getRelatedKeyword(item[0])" class="btn btn-success btn-sm">Get
+                                        Related Keyword
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr v-if="trend_keyword.length<1">
+                                <td colspan="3" class="text-center">No ideas</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="modal fade" id="modal-draft" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -365,7 +448,8 @@ class TuyulMenu {
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button :disabled="processing" @click="draftSelectedIdeas" type="button" class="btn btn-outline-success">Create
+                                    <button :disabled="processing" @click="draftSelectedIdeas" type="button"
+                                            class="btn btn-outline-success">Create
                                         <span v-if="!processing">Draft Now</span>
                                         <span v-if="processing">Processing...</span>
                                     </button>

@@ -12,7 +12,8 @@
   "require": {
     "composer/installers": "~1.0",
     "kub-at/php-simple-html-dom-parser": "^1.9",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-simplexml": "*"
   },
   "autoload": {
     "psr-4": {

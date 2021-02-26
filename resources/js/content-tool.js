@@ -4,13 +4,16 @@ var app = new Vue({
     el: "#app",
     data: {
         topic: '',
-        suggested_ideas: ['makan'],
+        suggested_ideas: [],
         selected_ideas: [],
         selected_all: false,
         download_name: 'ideas.txt',
         download_content: '',
         post_category: 1,
         post_tags: '',
+        trend_country: 'p1',
+        trend_keyword: [],
+        selected_keyword: [],
         processing: false
     },
     methods: {
@@ -128,6 +131,56 @@ var app = new Vue({
                 })
                 this.processing = false
             })
+        },
+        getTrendKeyword() {
+            this.processing = true
+            let data = new FormData()
+            data.append('action', 'tuyul_get_trend_keyword')
+            data.append('country', this.trend_country)
+            axios.post(ajaxurl, data).then(res => {
+                this.processing = false
+                if (res.data.code === 200) {
+                    this.trend_keyword = res.data.data
+                }
+            })
+        },
+        getRelatedKeyword(keyword) {
+            this.topic = keyword
+            $.ajax({
+                url: "https://suggestqueries.google.com/complete/search",
+                jsonp: "jsonp",
+                dataType: "jsonp",
+                data: {
+                    q: this.topic,
+                    client: "chrome"
+                },
+                success: (res => {
+                    this.processing = false
+                    result = res[1]
+                    if (result.length < 1) {
+                        Swal.fire({
+                            title: 'Information',
+                            text: 'No ideas found related to ' + this.topic,
+                            icon: 'warning'
+                        })
+                    } else {
+                        for (let i = 0; i < result.length; i++) {
+                            this.suggested_ideas.push(this.cleanIdea(result[i]))
+                        }
+                        Swal.fire({
+                            title: 'Information',
+                            text: 'Ideas related to keyword ' + this.topic+' is ready',
+                            icon: 'success'
+                        }).then(res=>{
+                            $("#content-ideas-tab").tab('show')
+                        })
+                    }
+                }),
+                err: (err => {
+                    this.processing = false
+                })
+            });
+
         },
         cleanIdea(input) {
             var val = input;
