@@ -44,6 +44,12 @@ Tuyul Ninja now is only supported to sends scheduled post to: Email, Blogger, an
 5. Job completion histories
 
 ## Tutorial
+### Video
+- Get Content Ideas using Google Trends and Google Suggestion public API
+    - [youtube https://www.youtube.com/watch?v=6QO9x5HgK3w]
+- Send wordpress post automatically to Telegram Channel
+    - [youtube https://www.youtube.com/watch?v=IiJ-LDLcnco]
+### Article
 * [Post Blogger Articles Using Email](https://forum.nusagates.com/threads/post-blogger-articles-using-email.141/)
 * [Sending WordPress Post to Blogspot Automatically](https://forum.nusagates.com/threads/sending-wordpress-post-to-blogspot-automatically.140/)
 * [Sending Wordpress Articles to Telegram Automatically](https://forum.nusagates.com/threads/sending-wordpress-articles-to-telegram-automatically.142/)
