@@ -35,7 +35,7 @@ var app = new Vue({
                         })
                     } else {
                         for (let i = 0; i < result.length; i++) {
-                            this.suggested_ideas.push(result[i])
+                            this.suggested_ideas.push(this.cleanIdea(result[i]))
                         }
                     }
                 }),
@@ -128,6 +128,26 @@ var app = new Vue({
                 })
                 this.processing = false
             })
+        },
+        cleanIdea(input) {
+            var val = input;
+            val = val.replace("\\u003cb\\u003e", "");
+            val = val.replace("\\u003c\\/b\\u003e", "");
+            val = val.replace("\\u003c\\/b\\u003e", "");
+            val = val.replace("\\u003cb\\u003e", "");
+            val = val.replace("\\u003c\\/b\\u003e", "");
+            val = val.replace("\\u003cb\\u003e", "");
+            val = val.replace("\\u003cb\\u003e", "");
+            val = val.replace("\\u003c\\/b\\u003e", "");
+            val = val.replace("\\u0026amp;", "&");
+            val = val.replace("\\u003cb\\u003e", "");
+            val = val.replace("\\u0026", "");
+            val = val.replace("\\u0026#39;", "'");
+            val = val.replace("#39;", "'");
+            val = val.replace("\\u003c\\/b\\u003e", "");
+            val = val.replace("\\u2013", "2013");
+            if (val.length > 4 && val.substring(0, 4) == "http") val = "";
+            return val;
         }
     },
     mounted() {
