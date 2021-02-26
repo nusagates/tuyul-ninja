@@ -33,8 +33,11 @@ Tuyul Ninja now is only supported to email channel only. For other provider like
 3. Run the job manually to test it
 
 ## Screenshots
-1. Create new job and avaliable jobs
-2. Job completion histories
+1. Get ideas from Google Suggestion
+2. Get ideas from Google Trends
+3. Save ideas to post draft
+4. Create new job and avaliable jobs
+5. Job completion histories
 
 ## Tutorial
 * [Post Blogger Articles Using Email](https://forum.nusagates.com/threads/post-blogger-articles-using-email.141/)
@@ -42,6 +45,11 @@ Tuyul Ninja now is only supported to email channel only. For other provider like
 * [Sending Wordpress Articles to Telegram Automatically](https://forum.nusagates.com/threads/sending-wordpress-articles-to-telegram-automatically.142/)
 
 ## Changelog ##
+### 1.2.0 ###
+- Get content ideas using Google Suggestion public API
+- Get content ideas using Google Trends public API
+- Save content ideas as post draft
+- Download content ideas as text file
 ### 1.0.2 ###
 - fix Tuyul send wrong post categories
 ### 1.0.1 ###

@@ -4,7 +4,7 @@
 Plugin Name: Tuyul Ninja
 Plugin URI: https://forum.nusagates.com/tags/tuyul-ninja/
 Description: Tuyul Ninja enables you to send wordpress post to available providers via cronjob.
-Version: 1.0.2
+Version: 1.2.0
 Author: Ahmad Budairi<budairi.contact@gmail.com>
 Author URI: https://skutik.com/author/5737498951
 Tested up to: 5.6.1

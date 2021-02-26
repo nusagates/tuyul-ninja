@@ -255,7 +255,7 @@ class TuyulMenu {
 
 	public function content_tool_page() {
 		$this->add_dependencies( 'content-tool' );
-		$categories = get_categories();
+		$categories = get_categories(['hide_empty' => false]);
 		?>
         <div id="app">
             <div class="container">
@@ -471,7 +471,7 @@ class TuyulMenu {
 		// JS
 		wp_enqueue_script( 'wpty_bootstrap', TUYUL_URL . 'resources/js/bootstrap.min.js' );
 		wp_enqueue_script( 'wpty_swal2', TUYUL_URL . 'resources/js/sweetalert2.js' );
-		wp_enqueue_script( 'wpty_vue', TUYUL_URL . 'resources/js/vue.js' );
+		wp_enqueue_script( 'wpty_vue', TUYUL_URL . 'resources/js/vue-prod.js' );
 		wp_enqueue_script( 'wpty_axios', TUYUL_URL . 'resources/js/axios.min.js' );
 		switch ( $page ) {
 			case '':
