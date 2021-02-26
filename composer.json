@@ -1,0 +1,22 @@
+{
+  "name": "nusagates/tuyul-ninja",
+  "description": "Tuyul Ninja enables you to send wordpress post to available providers via cronjob",
+  "license": "GPLv2 or later",
+  "authors": [
+    {
+      "name": "Ahmad Budairi",
+      "email": "budairi.contact@gmail.com"
+    }
+  ],
+  "minimum-stability": "beta",
+  "require": {
+    "composer/installers": "~1.0",
+    "kub-at/php-simple-html-dom-parser": "^1.9",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}
